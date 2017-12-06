@@ -14,7 +14,7 @@
 
 3.通过js中window.location重定向方法跳转。
 
-4.通过window.open打开第三方的下载页。如：应用宝等
-···
+4.通过window.open打开第三方的下载页。如：应用宝等<br>
+```
 window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.travel.maintab&g_f=991653");//adf
-···
+```
