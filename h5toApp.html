@@ -6,11 +6,19 @@
     <meta name='apple-itunes-app' content='app-id=1024484466'>
     <title>web页面跳转App</title>
 
-    <script src="Scripts/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 
 <style type="text/css">
+    body {
+        margin: 0;
+    }
+
+    .block .tl {
+        line-height: 40px;
+        padding-left: 30px;
+    }
+
     .item {
         width: 100%;
         height: 80px;
@@ -20,187 +28,145 @@
     }
 </style>
 
-<!--<div>
-    <div>百度</div>
+<div class="web_to_app">
 
-    <div class="item" onclick="window.location='http://www.baidu.com'">乐游宝 div location.href</div>
+    <div class="block">
 
-</div>-->
+        <div class="tl">微信</div>
 
-<div>
-    <div>微信</div>
+        <div class="jump_type">
 
-    <a class="item" href="weixin://">微信 a 直接href</a>
-    <a class="item " href="" onclick="GoWeixin(this)">微信 a 方法</a>
-    <div class="item weixintest" onclick="alert(112222);window.location = 'weixin://';">微信 div window.location</div>
+            <a class="item" href="weixin://">
+                1.a标签 href跳转
+            </a>
 
-</div>
+            <div class="item" onclick="goWxByLocation()">
+                2.window.location跳转
+            </div>
 
-<div>
-    <div>乐游宝</div>
+            <div class="item" onclick="goWxByIframe()">
+                3.iframe跳转
+            </div>
 
-    <div class="item" onclick="window.location = 'https://itunes.apple.com/cn/app/id1024484466';">
-        乐游宝 div 直接跳转ios应用商店下载
+        </div>
+
     </div>
 
-    <div class="item" onclick="GoLeyoobao()">乐游宝 div location.href</div>
+    <div class="block">
 
-    <div class="item" onclick='window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.travel.maintab&g_f=991653");'>
-        乐游宝 div window.open
+        <div class="tl">百度贴吧</div>
+
+        <div class="jump_type">
+
+            <div class="item" onclick="goTbByLocation()">
+                1.window.location跳转
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="block">
+
+        <div class="tl">乐游宝</div>
+
+        <div class="jump_type">
+
+            <!--<div class="item" onclick="window.location= 'https://itunes.apple.com/cn/app/id1024484466';">-->
+            <!--乐游宝 div 直接跳转ios应用商店下载-->
+            <!--</div>-->
+
+            <div class="item" onclick="goLeyoobaoByLocation()">
+                1.window.location跳转
+            </div>
+
+            <div class="item"
+                 onclick='window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.travel.maintab&g_f=991653");'>
+                乐游宝 div window.open
+            </div>
+
+        </div>
+
     </div>
 
 </div>
 
-<div>
-
-    <div>百度贴吧</div>
-
-    <div class="item" onclick="GoBaiduTB()">百度贴吧 div location.href</div>
-
-</div>
-
-<div>
-    <div>新浪微博</div>
-
-    <div class="item" onclick="GoXLWeiBo()">新浪微博 div location.href</div>
-
-</div>
 
 <script>
 
-    $(function () {
-
-        document.getElementById('openApp').onclick = function (e) {
-            // 通过iframe的方式试图打开APP，如果能正常打开，会直接切换到APP，并自动阻止js其他行为
-
-            var ifr = document.createElement('iframe');
-            ifr.src = 'com.baidu.tieba://';//打开app的协议，有app同事提供
-            ifr.style.display = 'none';
-            document.body.appendChild(ifr);
-            window.setTimeout(function () {
-                document.body.removeChild(ifr);
-                window.location.href = "https://itunes.apple.com/cn/app/id477927812";//打开app下载地址，有app同事提供
-            }, 2000)
-        };
-
-    });
-
-    //进入微信
-    function GoWeixin(self) {
-        alert(1231)
-        //$(this).attr('href', 'weixin://')
-        $(self).attr("href", "weixin://")
+    //微信 window.location跳转
+    var goWxByLocation = function () {
+        window.location = 'weixin://';
     };
 
-    //进入乐游宝
-    function GoLeyoobao() {
+    //微信 iframe跳转
+    var goWxByIframe = function () {
 
-        var loadDateTime = new Date();//
-        //ios
-
-
-        if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-            alert("ios")
-            window.setTimeout(function () {
-                var timeOutDateTime = new Date();
-                if (timeOutDateTime - loadDateTime < 5000) {
-                    alert(1)
-
-                    window.location = "https://itunes.apple.com/cn/app/id1024484466";
-                }
-                else {
-                    alert(2)
-                    //window.close();
-                }
-
-            }, 3000);
-            window.location = "leyoobao://";
-
-        }
-        //andorid
-        else if (navigator.userAgent.match(/android/i)) {
-            window.setTimeout(function () {
-
-                window.location = "http://download.leyoobao.com/";
-
-            }, 3000);
-
-            window.location.href = "laofan://com.travel.maintab";
-            //window.open("laofan://com.travel.maintab");
-
-        }
-        else {
-            alert("123")
-        }
+        // 通过iframe的方式试图打开APP，如果能正常打开，会直接切换到APP，并自动阻止js其他行为
+        var ifr = document.createElement('iframe');
+        ifr.src = 'weixin://';//打开app的协议，有app同事提供
+        ifr.style.display = 'none';
+        document.body.appendChild(ifr);
+        window.setTimeout(function () {
+            document.body.removeChild(ifr);
+            alert("跳转到微信的下载页");
+        }, 2000)
 
     };
 
-    //进入百度贴吧
-    function GoBaiduTB() {
+    //百度贴吧 window.location跳转
+    //百度贴吧 在ios上的下载页不能直接跳过去，有问题，没解决？？？？？
+    var goTbByLocation = function () {
 
         //ios
         if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
             alert("ios_1");
             window.location = "com.baidu.tieba://";//ios app协议
-//            window.location = "https://itunes.apple.com/cn/app/id477927812";
-//            window.location = "https://www.baidu.com";
-
             window.setTimeout(function () {
-                alert("ios_没安装");
+                alert("ios_没安装,进入下载页。");
                 window.location = "https://itunes.apple.com/cn/app/id477927812";
-
-            }, 3000);
+            }, 2000);
         }
         //andorid
         else if (navigator.userAgent.match(/android/i)) {
             window.location = "com.baidu.tieba://app";//android app协议
             window.setTimeout(function () {
 
-                alert("没安装");
+                alert("android_没安装，进入下载页。");
 //                window.location.href = "https://****.apk";//android 下载地址
             }, 3000);
         }
         else {
-            alert("123")
+            alert("无法识别类型！")
         }
 
     };
 
-    //进入 新浪微博
-    function GoXLWeiBo() {
+    //乐游宝 window.location跳转
+    var goLeyoobaoByLocation = function () {
+
         //ios
         if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
-
-            var loadDateTime = new Date();//
+            alert("ios_1");
+            window.location = "leyoobao://";//ios app协议
             window.setTimeout(function () {
-                var timeOutDateTime = new Date();
-                if (timeOutDateTime - loadDateTime < 5000) {
-                    alert("没安装")
-                }
-                else {
-
-                }
-
+                alert("ios_没安装,进入下载页。");
+                window.location = "https://itunes.apple.com/cn/app/id1024484466";
             }, 2000);
-            window.location = "sinaweibo://";
-
         }
         //andorid
         else if (navigator.userAgent.match(/android/i)) {
+            window.location.href = "laofan://com.travel.maintab";
             window.setTimeout(function () {
-
-                alert("没安装")
-
-            }, 2000);
-
-            window.location.href = "sinaweibo://";
-
+                window.location = "http://download.leyoobao.com/";
+            }, 3000);
         }
         else {
-            alert("123")
+            alert("无法识别类型！");
         }
 
     };
+
 
 </script>
 
