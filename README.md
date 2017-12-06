@@ -6,7 +6,9 @@
 方法：
 
 1.a标签直接通过href跳转。
+```
 <a class="item" href="weixin://">微信 a 直接href</a>
+```
 
 2.通过iframe标签跳转。
 
