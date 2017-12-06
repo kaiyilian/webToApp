@@ -7,7 +7,9 @@
 
 1.a标签直接通过href跳转。
 ```
-<a class="item" href="weixin://">微信 a 直接href</a>
+<a class="item" href="weixin://">
+  a标签 href跳转
+</a>
 ```
 
 2.通过iframe标签跳转。
