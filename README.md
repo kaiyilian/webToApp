@@ -16,5 +16,8 @@
 
 4.通过window.open打开第三方的下载页。如：应用宝等<br>
 ```
-window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.travel.maintab&g_f=991653");//adf
+//跳转到应用宝之后，会自动检测，本地有没有该app
+//如果有，则直接打开app
+//如果没有，则停留在下载页面
+window.open("http://a.app.qq.com/o/simple.jsp?pkgname=com.travel.maintab&g_f=991653");
 ```
